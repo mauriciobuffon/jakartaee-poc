@@ -8,11 +8,11 @@ import jakarta.ws.rs.ext.ContextResolver;
 import jakarta.ws.rs.ext.Provider;
 
 @Provider
-public class JsonbConfiguration implements ContextResolver<Jsonb> {
+public class JsonbContextResolver implements ContextResolver<Jsonb> {
 
     private Jsonb jsonb;
 
-    public JsonbConfiguration() {
+    public JsonbContextResolver() {
         JsonbConfig config = new JsonbConfig()
                 // .withAdapters(new UUIDAdapter())
                 .withAdapters(new AgregadorIdAdapter())

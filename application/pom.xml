@@ -22,8 +22,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derbyclient</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -42,6 +42,37 @@
                     <failOnMissingWebXml>true</failOnMissingWebXml>
                     <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <configuration>
+                    <!-- GLOW -->
+                    <!-- <discover-provisioning-info>
+                        <failsOnError>false</failsOnError>
+                    </discover-provisioning-info> -->
+                    <!-- GALLEON -->
+                    <server-config>standalone.xml</server-config>
+                    <commands>
+                        <command>/subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi, value=false)</command>
+                    </commands>
+                    <feature-packs>
+                        <feature-pack>
+                            <location>wildfly@maven(org.jboss.universe:community-universe)</location>
+                        </feature-pack>
+                    </feature-packs>
+                    <layers>
+                        <layer>jaxrs-server</layer>
+                    </layers>
+                    <jdk-version>21</jdk-version>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>image</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 
