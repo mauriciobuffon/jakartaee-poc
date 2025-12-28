@@ -16,16 +16,31 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>utils</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>domain</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
 
+        <!-- LOGGING -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JDBC -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- JAKARTA EE -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
@@ -57,12 +72,6 @@
                         <groupId>org.wildfly.plugins</groupId>
                         <artifactId>wildfly-maven-plugin</artifactId>
                         <configuration>
-                            <!-- GLOW -->
-                            <!--
-                            <discover-provisioning-info>
-                                <failsOnError>false</failsOnError>
-                            </discover-provisioning-info>
-                            -->
                             <!-- GALLEON -->
                             <server-config>standalone.xml</server-config>
                             <feature-packs>
@@ -76,8 +85,12 @@
                             <packaging-scripts>
                                 <packaging-script>
                                     <commands>
-                                        <command><![CDATA[/subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi, value=false)]]></command>
-                                        <command><![CDATA[/subsystem=ee:write-attribute(name="spec-descriptor-property-replacement", value=true)]]></command>
+                                        <command>
+                                            <![CDATA[/subsystem=undertow/application-security-domain=other:write-attribute(name="integrated-jaspi",value=false)]]>
+                                        </command>
+                                        <command>
+                                            <![CDATA[/subsystem=ee:write-attribute(name="spec-descriptor-property-replacement",value=true)]]>
+                                        </command>
                                     </commands>
                                 </packaging-script>
                             </packaging-scripts>

@@ -1,6 +1,10 @@
 module br.dev.webit.jakart.application {
     // webit
+    requires br.dev.webit.jakartapoc.utils;
     requires br.dev.webit.jakartapoc.domain;
+
+    // 3rd parties
+    requires static org.slf4j;
 
     // jakarta
     requires jakarta.persistence;
